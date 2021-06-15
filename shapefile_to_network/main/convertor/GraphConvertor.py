@@ -2,6 +2,7 @@ from shapely.geometry import shape
 from shapely.ops import unary_union
 import fiona
 import networkx as nx
+import geopy.distance
 import itertools
 from haversine import haversine
 from GraphSimplify import GraphSimplify
@@ -83,15 +84,17 @@ class GraphConvertor:
 
     def graph_convertor(self):
         G = self.shape_convertor()
-        print("Number of Nodes in the graph, ", len(G.nodes))
+        nodes = G.nodes()
+        #print("Number of Nodes in the graph, ", len(nodes))
 
         #Add new edges over pacific
-        G.add_edge((35.104061, 174.694794), (34.254669, -179.201843),weight=566.57067)
-        G.add_edge((35.104061, 174.694794), (39.99998, -180), weight=718.210347)
-        G.add_edge((35.104061, 174.694794), (28.49999, -178.5), weight=976.651143)
-        G.add_edge((25.08361, 175.2045), (28.00528, -179.0164), weight=660.918169)
-        G.add_edge((25.08361, 175.2045), (24.2531, -179.2756), weight=565.951733)
-        G.add_edge((25.08361, 175.2045), (20, -180), weight=750.387649)
+        for node in nodes:
+            if node[1] > 170:
+                for node2 in nodes:
+                    if node2[1] < -170:
+                        if (node[0] - 10) < node2[0] < (node[0] + 10):
+                            distance = geopy.distance.distance(node, node2)
+                            G.add_edge(node, node2, weight=distance.km)
 
         #simplify_graph = GraphSimplify(G)
         #new_G = simplify_graph.simplify_graph()
