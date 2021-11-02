@@ -33,7 +33,9 @@ def nh3_costs(pipe_dist=99.57142, ship_dist=1.926, truck_dist=-83.0, convert=Tru
 
     truck = 0.0008 * truck_dist + 0.0664
 
-    return conversion + export + ship + pipe + truck + reconversion
+    total = conversion + export + ship + pipe + truck + reconversion
+
+    return total
 
 
 def h2_gas_costs(pipe_dist=-102.75, truck_dist=-106.0, pipeline=True, max_pipeline_dist=2000):

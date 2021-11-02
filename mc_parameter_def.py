@@ -9,7 +9,7 @@ def normalize(min, max, array):
     return normalized
 
 
-def define_gen_parameters(year, iterations):
+def define_gen_parameters(year, iterations, type='alkaline'):
     """Defines distributions for the parameters for the monte carlo simulation."""
 
     if 2020 <= year <= 2050:
@@ -51,7 +51,7 @@ def define_gen_parameters(year, iterations):
 
     # Determination of wind power parameters
     if year <= 2030:
-        capex_wind = np.random.triangular(1200, 1260, 1500, (iterations, 1)) * (0.9775 ** year_diff)
+        capex_wind = np.random.triangular(1200, 1260, 1500, (iterations, 1)) * (0.9775 ** year_diff)   #[Eur/kW]
     else:
         capex_wind = np.random.triangular(1200, 1260, 1500, (iterations, 1)) * (0.9775 ** 10) * (
                 0.9985 ** (year - 2030))
@@ -61,4 +61,4 @@ def define_gen_parameters(year, iterations):
     capex_solar = np.random.triangular(500, 700, 1100, (iterations, 1)) * (0.9986 ** year_diff)  # [Eur/kWp]
     opex_factor_solar = np.random.triangular(0.01, 0.015, 0.02, (iterations, 1))  # []
 
-    return capex_extra, capex_h2, lifetime_hours, electrolyser_efficiency, elec_opex, other_capex_elec, water_cost, capex_wind, opex_wind, capex_solar, opex_factor_solar
+    return year_diff, capex_extra, capex_h2, lifetime_hours, electrolyser_efficiency, elec_opex, other_capex_elec, water_cost, capex_wind, opex_wind, capex_solar, opex_factor_solar
