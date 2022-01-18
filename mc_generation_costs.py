@@ -14,7 +14,7 @@ def mc_generation_costs(df_ren, h2_demand, year_diff, capex_extra, capex_h2, lif
                         elec_opex,
                         other_capex_elec, water_cost,
                         capex_wind, opex_wind, capex_solar, opex_factor_solar,
-                        interest=0.08, full_load_hours=6000):
+                        interest=0.08, full_load_hours=2000):
     """Calculates the cost of H2 generation on a yearly and per kg basis. Requires the main dataframe as input.
     Optional inputs are the H2 demand (kt/yr) year (2019 or 2050), electrolyser type (alkaline, SOEC, or other),
     interest rate, and full load hours (hours/yr). """

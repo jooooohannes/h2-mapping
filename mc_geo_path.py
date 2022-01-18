@@ -126,7 +126,6 @@ def check_port_path(df, end_plant_tuple):
     # Find the closest port to the end point
     distance, index = spatial.KDTree(port_coords).query(end_plant_tuple)  # Needs [long, lat]
     end_port_code = df_ports.at[index, 'Unnamed: 0']
-    print('End Port Code: ' + str(end_port_code))
     end_port_tuple = port_coords[index][::-1]  # Outputs [long, lat]
 
     # Check if port code is in the port distances index. If not, create new shipping paths and add them to the index.
@@ -142,7 +141,7 @@ def check_port_path(df, end_plant_tuple):
 
 
 def mc_transport_costs(df, end_plant_tuple, h2_demand, cost_end_nh3, cost_end_lohc, cost_end_h2_liq, centralised=True,
-                       pipeline=True, max_pipeline_dist=2000):
+                       pipeline=True, max_pipeline_dist=10000):
     """Calculates the transport costs from all start points to the end point. Takes in the main dataframe,
     the end point tuple (lat, lon) and if the distribution point is centralised or not as input. Adds in shipping
     distances from start port to end port and driving and direct distances from end port to consumption point.
@@ -203,7 +202,7 @@ def mc_transport_costs(df, end_plant_tuple, h2_demand, cost_end_nh3, cost_end_lo
     return df
 
 
-def initial_geo_calcs(df, end_plant_tuple, centralised=True, pipeline=True, max_pipeline_dist=2000):
+def initial_geo_calcs(df, end_plant_tuple, centralised=True, pipeline=True, max_pipeline_dist=10000):
     df, end_port_tuple = check_port_path(df, end_plant_tuple)
 
     # Get straight line distance from end point to end port
@@ -215,19 +214,19 @@ def initial_geo_calcs(df, end_plant_tuple, centralised=True, pipeline=True, max_
 
     # Calculate minimum costs from end port to end location for all medium possibilities
     end_nh3_options = [nh3_costs(truck_dist=driving_distance_end, convert=False, centralised=centralised),
-                       nh3_costs(pipe_dist=direct_distance_end, convert=False, centralised=centralised,
+                       nh3_costs(pipe_dist=direct_distance_end * 1.2, convert=False, centralised=centralised,
                                  pipeline=pipeline, max_pipeline_dist=max_pipeline_dist),
-                       h2_gas_costs(pipe_dist=direct_distance_end, pipeline=pipeline,
+                       h2_gas_costs(pipe_dist=direct_distance_end * 1.2, pipeline=pipeline,
                                     max_pipeline_dist=max_pipeline_dist),
                        h2_gas_costs(truck_dist=driving_distance_end)]
     cost_end_nh3 = np.nanmin(end_nh3_options)
     end_lohc_options = [lohc_costs(truck_dist=driving_distance_end, convert=False, centralised=centralised),
-                        h2_gas_costs(pipe_dist=direct_distance_end, pipeline=pipeline,
+                        h2_gas_costs(pipe_dist=direct_distance_end * 1.2, pipeline=pipeline,
                                      max_pipeline_dist=max_pipeline_dist),
                         h2_gas_costs(truck_dist=driving_distance_end)]
     cost_end_lohc = np.nanmin(end_lohc_options)
     end_h2_liq_options = [h2_liq_costs(truck_dist=driving_distance_end, convert=False, centralised=centralised),
-                          h2_gas_costs(pipe_dist=direct_distance_end, pipeline=pipeline,
+                          h2_gas_costs(pipe_dist=direct_distance_end * 1.2, pipeline=pipeline,
                                        max_pipeline_dist=max_pipeline_dist),
                           h2_gas_costs(truck_dist=driving_distance_end)]
     cost_end_h2_liq = np.nanmin(end_h2_liq_options)
