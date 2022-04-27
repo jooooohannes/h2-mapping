@@ -8,8 +8,8 @@ import timeit
 import json
 from Transport_cost_functions import *
 
-sys.path.append("C:/Users/Jason Collis/Documents/Papers/mapping paper/model/shapefile_to_network/main/convertor")
-sys.path.append("C:/Users/Jason Collis/Documents/Papers/mapping paper/model/shapefile_to_network/main/shortest_paths")
+sys.path.append("C:/Users/.../shapefile_to_network/main/convertor")
+sys.path.append("C:/Users/.../shapefile_to_network/main/shortest_paths")
 
 from shapefile_to_network.main.convertor.GraphSimplify import GraphSimplify
 from shapefile_to_network.main.convertor.GraphConvertor import GraphConvertor
