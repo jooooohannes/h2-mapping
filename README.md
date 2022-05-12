@@ -48,7 +48,7 @@ The free “Community” edition is sufficient for our purposes. If not done alr
 H2-mapping repository from github. Then open the “mapping-h2-main” -folder as a project
 in PyCharm.
 
-             Installing packages
+            Installing packages
              
 PyCharm should automatically detect the requirements.txt file, which allows us to conveniently
 install all required packages:
@@ -70,7 +70,7 @@ mc_geo_path.py files. The sys.path.append() statements (lines 11 and 12) in geo_
 need to be modified according to your computer’s folder structure. The same needs to be
 done in mc_geo_path.py for the lines 8 and 9.
 
-              Interpreter configuration
+            Interpreter configuration
 
 Before running main.py / mc_main.py you have to configure a python interpreter. At the
 time of writing this guide the standard interpreter would be called Python 3.10 and comes
@@ -94,7 +94,7 @@ Finally under Python interpreter select Python 3.10 and exit the window by click
 
 ![add_configuration4](https://user-images.githubusercontent.com/101879083/167870735-d2e51c06-0484-4ba4-bc1c-465fec0adbcb.png)
 
-              Running the model
+             Running the model
 
 Now you should be able to run the code by clicking on the green “Play” button in the
 top right corner of the PyCharm environment. You can change parameters directly in
