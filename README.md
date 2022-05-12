@@ -27,7 +27,7 @@ based on this model covers the uncertainty inherent in future forecasts much bet
 allowing the underlying production cost related data to range between extreme estimations,
 the simulation can compute a distribution of hydrogen production costs. To cover the whole
 globe, a network of 5970 points was constructed where renewable energy production from
-solar or wind would be possible. Connecting these locations to their solar and wind energy
+solar or wind would be feasible. Connecting these locations to their solar and wind energy
 potential, establishes a starting point for the calculation of the hydrogen production costs.
 In regards to the transport cost there are a lot of different factors. There are three modes of
 transportation available, which are truck, ship and pipeline. Furthermore the hydrogen itself
@@ -109,9 +109,14 @@ variable is either True or False, depending on whether the centralised re-conver
 transport-intermediates (Ammonia, LOHC, lq. H2) is desired or omitted. The same goes
 for the pipeline variable which either includes or excludes the usage of pipelines in the
 model. Lastly with the help of max_pipeline_dist you can put a restriction on the
-maximum length of a pipeline in kilometers, given that it is used in the model. The results
-are shown in the console. Additionally there are two more parameters you can set in the
-Monte-Carlo-simulation.
+maximum length of a pipeline in kilometers, given that it is used in the model. 
+A summary of your results is shown in the console. Additionally The whole calculation 
+results are stored in the ``Results'' folder. You will find the latest run under ``final\_df''. 
+The file is organized by rows and columns. The rows are simply the 5970 different locations,
+while the columns contain all the calculation steps from solar potential, over capital
+expenditures to total cost of hydrogen per kilogram.
+
+In the Monte-Carlo-simulation there are two more parameters that you can set.
 
 ![parameters_mc_main](https://user-images.githubusercontent.com/101879083/167871037-cacbd515-ba82-4320-84ea-f9daa0070603.png)
 
@@ -125,4 +130,8 @@ main files, right-click on main.py / mc_main.py an click on run ’main’ or ru
 respectively. Remember that a python interpreter has to be set before you can run the
 program. The Computing time depends on whether a new location is entered (meaning the
 shortest path algorithm has to run) or how many mc simulation iterations are desired. Of
-course the components of your PC also play a role.
+course the components of your PC also play a role. 
+Like in the main model you will find your results in the ``Results'' folder. 
+All Monte-Carlo-Simulation runs are stored in the ``mc'' subfolder and for every run 
+there will be an extra folder containing 4 csv-files. They are named according to their
+content and are organised by iterations as rows (e.g. 1000 iterations = 1000 rows) and locations in the columns. 
