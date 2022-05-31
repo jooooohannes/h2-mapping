@@ -1,0 +1,27 @@
+attrs==21.4.0
+certifi==2021.10.8
+charset-normalizer==2.0.12
+click==8.1.2
+click-plugins==1.1.1
+cligj==0.7.2
+colorama==0.4.4
+Fiona @ file:///C:/Users/Jo/Documents/Masterarbeit/mapping-h2-main/mapping-h2-main/Fiona-1.8.21-cp310-cp310-win_amd64.whl
+GDAL @ file:///C:/Users/Jo/Documents/Masterarbeit/mapping-h2-main/mapping-h2-main/GDAL-3.4.2-cp310-cp310-win_amd64.whl
+geographiclib==1.52
+geopandas==0.10.2
+geopy==2.2.0
+haversine==2.5.1
+munch==2.5.0
+networkx==2.8
+numpy==1.22.3
+pandas==1.4.1
+plotly==5.7.0
+pyproj==3.3.0
+python-dateutil==2.8.2
+pytz==2022.1
+requests==2.27.1
+scipy==1.8.0
+Shapely==1.8.1.post1
+six==1.16.0
+tenacity==8.0.1
+urllib3==1.26.9

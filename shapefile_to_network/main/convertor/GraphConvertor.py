@@ -1,13 +1,9 @@
+import fiona
+import geopy.distance
+import networkx as nx
+from haversine import haversine
 from shapely.geometry import shape
 from shapely.ops import unary_union
-import fiona
-import networkx as nx
-import geopy.distance
-import itertools
-from haversine import haversine
-from GraphSimplify import GraphSimplify
-from MultiDiGraphConvertor import MultiDiToSimple
-
 
 class GraphConvertor:
     def __init__(self, input_file, output_dir):
@@ -95,6 +91,19 @@ class GraphConvertor:
                         if (node[0] - 10) < node2[0] < (node[0] + 10):
                             distance = geopy.distance.distance(node, node2)
                             G.add_edge(node, node2, weight=distance.km)
+
+        #Add new nodes and edges for Spain
+        G.add_node((44.52736554981609, -3.6442414724703953))
+        G.add_node((46.35277724558476, -3.762119252196382))
+
+        for node in nodes:
+            if -2 > node[1] > -5:
+                if 48 > node[0] > 42:
+                    for node2 in nodes:
+                        if -2 > node2[1] > -5:
+                            if 48 > node2[0] > 42:
+                                distance = geopy.distance.distance(node, node2)
+                                G.add_edge(node, node2, weight=distance.km)
 
         #simplify_graph = GraphSimplify(G)
         #new_G = simplify_graph.simplify_graph()
